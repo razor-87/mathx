@@ -1,0 +1,86 @@
+linters:
+  disable-all: true
+  enable:
+    - dupl
+    - exportloopref
+    - gas
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - maintidx
+    - makezero
+    - megacheck
+    - misspell
+    - nakedret
+    - nilerr
+    - nilnil
+    - nlreturn
+    - nolintlint
+    - prealloc
+    - revive
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - wastedassign
+  fast: false
+
+linters-settings:
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - performance
+      - style
+    disabled-checks:
+      - commentedOutCode
+      - unnamedResult
+      - whyNoLint
+    settings:
+      hugeParam:
+        sizeThreshold: 512
+  gocyclo:
+    min-complexity: 15
+  govet:
+    enable:
+      - fieldalignment
+      - nilness
+      - shadow
+      - sigchanyzer
+      - stringintconv
+      - unusedwrite
+  lll:
+    line-length: 140
+  misspell:
+    locale: US
+  nlreturn:
+    block-size: 5
+  revive:
+    rules:
+      - name: if-return
+        disabled: true
+
+issues:
+  exclude-rules:
+    - text: "at least one file in a package should have a package comment"
+      linters:
+        - stylecheck
+    - path: _test\.go
+      linters:
+        - dupl
+        - gosec
+        - govet
+        - lll
+        - nlreturn
