@@ -1,17 +1,19 @@
 package gen
 
-func Vec(size int) []float64 {
-	vec := make([]float64, size)
+import "mathx/types"
+
+func Vec[T types.Vector[E], E types.Floaty](size int) T {
+	vec := make(T, size)
 	for i := range vec {
-		vec[i] = float64(i + 1)
+		vec[i] = E(i + 1)
 	}
 	return vec
 }
 
-func VecRand(size int) []float64 {
-	vec := make([]float64, size)
+func VecRand[T types.Vector[E], E types.Floaty](size int) T {
+	vec := make(T, size)
 	for i := 0; i < size; i++ {
-		vec[i] = r.Float64() + 0.001
+		vec[i] = E(r.Float64() + 0.001)
 	}
 	return vec
 }

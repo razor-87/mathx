@@ -16,7 +16,7 @@ var (
 
 var prepared bool = func() bool {
 	for _, size := range sizes {
-		vecs[size] = gen.VecRand(size)
+		vecs[size] = gen.VecRand[[]float64](size)
 	}
 	return true
 }()
