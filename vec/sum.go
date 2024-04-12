@@ -1,6 +1,6 @@
 package vec
 
-import "mathx/types"
+import "github.com/razor-87/mathx/types"
 
 func Sum[T types.Vector[E], E types.Floaty](xs T) (ret E) {
 	const k = 8

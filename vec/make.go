@@ -3,7 +3,7 @@ package vec
 import (
 	"math/rand"
 
-	"mathx/types"
+	"github.com/razor-87/mathx/types"
 )
 
 func Zeros[T types.Vector[E], E types.Floaty](size int) T {
