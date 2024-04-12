@@ -2,7 +2,6 @@ package vec
 
 import (
 	"math"
-	"mathx/gen"
 	"testing"
 )
 
@@ -31,79 +30,79 @@ func TestSum(t *testing.T) {
 		},
 		{
 			"five",
-			[]float64{1.1, 2.2, 3.3, 4.5, 5.5},
-			16.6,
+			IncBy[[]float64](5, 1.1),
+			16.5,
 			true,
 		},
 		{
 			"seven",
-			[]float64{1.1, 2.2, 3.3, 4.5, 5.5, 6.6, 7.7},
-			30.9,
+			IncBy[[]float64](7, 1.1),
+			30.8,
 			true,
 		},
 		{
 			"eight",
-			[]float64{1.1, 2.2, 3.3, 4.5, 5.5, 6.6, 7.7, 8.8},
-			39.7,
+			IncBy[[]float64](8, 1.1),
+			39.6,
 			true,
 		},
 		{
 			"nine",
-			[]float64{1.1, 2.2, 3.3, 4.5, 5.5, 6.6, 7.7, 8.8, 9.9},
-			49.6,
+			IncBy[[]float64](9, 1.1),
+			49.5,
 			true,
 		},
 		{
 			"ten",
-			[]float64{1.1, 2.2, 3.3, 4.5, 5.5, 6.6, 7.7, 8.8, 9.9, 10.10},
-			59.7,
+			IncBy[[]float64](10, 1.1),
+			60.5,
 			true,
 		},
 		{
 			"thirty one",
-			gen.Vec[[]float64](31),
+			Inc[[]float64](31),
 			496,
 			false,
 		},
 		{
 			"thirty two",
-			gen.Vec[[]float64](32),
+			Inc[[]float64](32),
 			528,
 			false,
 		},
 		{
 			"thirty three",
-			gen.Vec[[]float64](33),
+			Inc[[]float64](33),
 			561,
 			false,
 		},
 		{
 			"ninety nine",
-			gen.Vec[[]float64](99),
+			Inc[[]float64](99),
 			4950,
 			false,
 		},
 		{
 			"hundred",
-			gen.Vec[[]float64](100),
+			Inc[[]float64](100),
 			5050,
 			false,
 		},
 		{
 			"hundred and one",
-			gen.Vec[[]float64](101),
+			Inc[[]float64](101),
 			5151,
 			false,
 		},
 		{
 			"thousand",
-			gen.Vec[[]float64](1000),
+			Inc[[]float64](1000),
 			500500,
 			false,
 		},
 		{
 			"ten thousand",
-			gen.Vec[[]float64](10000),
+			Inc[[]float64](10000),
 			50005000,
 			false,
 		},
