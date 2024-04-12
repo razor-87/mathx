@@ -1,0 +1,26 @@
+name: Go
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: v1.57
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up go 1.21
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: run shuffle tests
+        run: go test -shuffle=on -timeout=3s -count 2 ./...
