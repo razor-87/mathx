@@ -1,3 +1,4 @@
+// Package vec provides functions for creating and manipulating vector data structures.
 package vec
 
 import (
