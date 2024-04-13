@@ -1,8 +1,8 @@
 package vec
 
-import "github.com/razor-87/mathx/types"
+import "github.com/razor-87/mathx"
 
-func Sum[T types.Vector[E], E types.Floaty](xs T) (ret E) {
+func Sum[T mathx.Vector[E], E mathx.Floaty](xs T) (ret E) {
 	const k = 8
 	if r := len(xs) % k; r != 0 {
 		for i := range xs[:r] {

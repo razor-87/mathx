@@ -3,14 +3,14 @@ package vec
 import (
 	"math/rand"
 
-	"github.com/razor-87/mathx/types"
+	"github.com/razor-87/mathx"
 )
 
-func Zeros[T types.Vector[E], E types.Floaty](size int) T {
+func Zeros[T mathx.Vector[E], E mathx.Floaty](size int) T {
 	return make(T, size)
 }
 
-func Ones[T types.Vector[E], E types.Floaty](size int) T {
+func Ones[T mathx.Vector[E], E mathx.Floaty](size int) T {
 	vec := Zeros[T](size)
 	for i := range vec {
 		vec[i] = E(1)
@@ -18,7 +18,7 @@ func Ones[T types.Vector[E], E types.Floaty](size int) T {
 	return vec
 }
 
-func Rep[T types.Vector[E], E types.Floaty](size int, value E) T {
+func Rep[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
 	vec := Zeros[T](size)
 	for i := range vec {
 		vec[i] = value
@@ -26,7 +26,7 @@ func Rep[T types.Vector[E], E types.Floaty](size int, value E) T {
 	return vec
 }
 
-func Inc[T types.Vector[E], E types.Floaty](size int) T {
+func Inc[T mathx.Vector[E], E mathx.Floaty](size int) T {
 	vec := Zeros[T](size)
 	for i := range vec {
 		vec[i] = E(i + 1)
@@ -34,7 +34,7 @@ func Inc[T types.Vector[E], E types.Floaty](size int) T {
 	return vec
 }
 
-func IncBy[T types.Vector[E], E types.Floaty](size int, value E) T {
+func IncBy[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
 	vec := Inc[T](size)
 	for i := range vec {
 		vec[i] *= value
@@ -42,7 +42,7 @@ func IncBy[T types.Vector[E], E types.Floaty](size int, value E) T {
 	return vec
 }
 
-func Rand[T types.Vector[E], E types.Floaty](size int) T {
+func Rand[T mathx.Vector[E], E mathx.Floaty](size int) T {
 	vec := Zeros[T](size)
 	for i := range vec {
 		vec[i] = E(rand.Float64()) //nolint:gosec
