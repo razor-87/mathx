@@ -12,11 +12,7 @@ func Zeros[T mathx.Vector[E], E mathx.Floaty](size int) T {
 }
 
 func Ones[T mathx.Vector[E], E mathx.Floaty](size int) T {
-	vec := Zeros[T](size)
-	for i := range vec {
-		vec[i] = E(1)
-	}
-	return vec
+	return Rep[T](size, 1)
 }
 
 func Rep[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
