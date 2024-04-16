@@ -1,6 +1,7 @@
 package vec
 
 import (
+	"math"
 	"testing"
 )
 
@@ -61,14 +62,16 @@ func TestInc(t *testing.T) {
 }
 
 func TestIncBy(t *testing.T) {
+	const epsilon = 1e-6
+	nums := []float64{1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 11}
 	t.Run("ten", func(t *testing.T) {
 		v := IncBy[[]float64](10, 1.1)
 		if len(v) != 10 {
 			t.Errorf("expected length 10, got %d", len(v))
 		}
-		for i, x := range v {
-			if x != float64(i+1)*1.1 {
-				t.Errorf("expected %f, got %f", float64(i+1)*1.1, x)
+		for i := range v {
+			if !(math.Abs(nums[i]-v[i]) < epsilon) {
+				t.Errorf("expected %f, got %f", nums[i], v[i])
 			}
 		}
 	})
