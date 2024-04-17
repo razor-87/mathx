@@ -1,8 +1,9 @@
 package vec
 
 import (
-	"math"
 	"testing"
+
+	"github.com/razor-87/mathx"
 )
 
 func TestZeros(t *testing.T) {
@@ -62,7 +63,6 @@ func TestInc(t *testing.T) {
 }
 
 func TestIncBy(t *testing.T) {
-	const epsilon = 1e-6
 	nums := []float64{1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 11}
 	t.Run("ten", func(t *testing.T) {
 		v := IncBy[[]float64](10, 1.1)
@@ -70,7 +70,7 @@ func TestIncBy(t *testing.T) {
 			t.Errorf("expected length 10, got %d", len(v))
 		}
 		for i := range v {
-			if !(math.Abs(nums[i]-v[i]) < epsilon) {
+			if !mathx.IsClose(nums[i], v[i]) {
 				t.Errorf("expected %f, got %f", nums[i], v[i])
 			}
 		}

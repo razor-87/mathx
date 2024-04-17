@@ -1,12 +1,12 @@
 package vec
 
 import (
-	"math"
 	"testing"
+
+	"github.com/razor-87/mathx"
 )
 
 func TestSum(t *testing.T) {
-	const epsilon = 1e-6
 	tests := []struct {
 		name    string
 		xs      []float64
@@ -116,7 +116,7 @@ func TestSum(t *testing.T) {
 			gotRet = Sum(tt.xs)
 			if equal = func() bool {
 				if tt.eps {
-					return math.Abs(tt.wantRet-gotRet) < epsilon
+					return mathx.IsClose(tt.wantRet, gotRet)
 				}
 				return gotRet == tt.wantRet
 			}(); !equal {
