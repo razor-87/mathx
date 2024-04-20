@@ -33,12 +33,9 @@ func Inc[T mathx.Vector[E], E mathx.Floaty](size int) T {
 
 func IncBy[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
 	vec := Zeros[T](size)
-	acc := value
-	for i := range vec {
+	for i, acc := 0, value; i < len(vec); i, acc = i+1, acc+value {
 		vec[i] = acc
-		acc += value
 	}
-
 	return vec
 }
 
