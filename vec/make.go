@@ -40,9 +40,12 @@ func IncBy[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
 }
 
 func Rand[T mathx.Vector[E], E mathx.Floaty](size int) T {
+	const n = 1 << 53
+	r := rand.New(rand.NewSource(rand.Int63())) //nolint:gosec
 	vec := Zeros[T](size)
 	for i := range vec {
-		vec[i] = E(rand.Float64()) //nolint:gosec
+		vec[i] = E(r.Int63()&(n-1)) / n
 	}
+
 	return vec
 }
