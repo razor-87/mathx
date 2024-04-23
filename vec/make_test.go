@@ -90,3 +90,28 @@ func TestRand(t *testing.T) {
 		}
 	})
 }
+
+func TestCopy(t *testing.T) {
+	t.Run("fast", func(t *testing.T) {
+		src := Inc[[]float64](5)
+		v := Copy(src)
+		if len(v) != len(src) {
+			t.Fatalf("expected length %d, got %d", len(src), len(v))
+		}
+		if i := 4; v[i] != src[i] {
+			t.Errorf("expected %f, got %f", src[i], v[i])
+		}
+	})
+	if !t.Failed() {
+		t.Run("deep", func(t *testing.T) {
+			src := Ones[[]float64](5)
+			v := Copy(src)
+			FillZeroes(src)
+			for i := range src {
+				if src[i] == v[i] {
+					t.Error("non-zero value is expected")
+				}
+			}
+		})
+	}
+}
