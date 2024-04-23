@@ -7,45 +7,47 @@ import (
 	"github.com/razor-87/mathx"
 )
 
-func Zeros[T mathx.Vector[E], E mathx.Floaty](size int) T {
-	return make(T, size)
+func Zeros[T mathx.Vector[E], E mathx.Floaty](size int) (v T) {
+	v = make(T, size)
+	return v
 }
 
-func Ones[T mathx.Vector[E], E mathx.Floaty](size int) T {
-	return Rep[T](size, 1)
+func Ones[T mathx.Vector[E], E mathx.Floaty](size int) (v T) {
+	v = Zeros[T](size)
+	FillOnes(v)
+	return v
 }
 
-func Rep[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
-	vec := Zeros[T](size)
-	for i := range vec {
-		vec[i] = value
+func Rep[T mathx.Vector[E], E mathx.Floaty](size int, value E) (v T) {
+	v = Zeros[T](size)
+	FillBy(v, value)
+	return v
+}
+
+func Inc[T mathx.Vector[E], E mathx.Floaty](size int) (v T) {
+	v = Zeros[T](size)
+	for i := range v {
+		v[i] = E(i + 1)
 	}
-	return vec
+	return v
 }
 
-func Inc[T mathx.Vector[E], E mathx.Floaty](size int) T {
-	vec := Zeros[T](size)
-	for i := range vec {
-		vec[i] = E(i + 1)
+func IncBy[T mathx.Vector[E], E mathx.Floaty](size int, value E) (v T) {
+	v = Zeros[T](size)
+	for i, acc := 0, value; i < len(v); i, acc = i+1, acc+value {
+		v[i] = acc
 	}
-	return vec
+	return v
 }
 
-func IncBy[T mathx.Vector[E], E mathx.Floaty](size int, value E) T {
-	vec := Zeros[T](size)
-	for i, acc := 0, value; i < len(vec); i, acc = i+1, acc+value {
-		vec[i] = acc
-	}
-	return vec
-}
-
-func Rand[T mathx.Vector[E], E mathx.Floaty](size int) T {
+func Rand[T mathx.Vector[E], E mathx.Floaty](size int) (v T) {
 	const n = 1 << 53
 	r := rand.New(rand.NewSource(rand.Int63())) //nolint:gosec
-	vec := Zeros[T](size)
-	for i := range vec {
-		vec[i] = E(r.Int63()&(n-1)) / n
+	v = Zeros[T](size)
+	for i := range v {
+		v[i] = E(r.Int63()&(n-1)) / n
 	}
 
-	return vec
+	return v
+}
 }
