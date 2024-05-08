@@ -2,6 +2,12 @@ package vec
 
 import "github.com/razor-87/mathx"
 
+func Add[T mathx.Vector[E], E mathx.Floaty](v, w T) {
+	for i := 0; i < len(v) && i < len(w); i++ {
+		v[i] += w[i]
+	}
+}
+
 func Sum[T mathx.Vector[E], E mathx.Floaty](v T) (ret E) {
 	const k = 8
 	for ; len(v) >= k; v = v[k:] {
