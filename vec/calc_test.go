@@ -61,6 +61,48 @@ func TestAdd(t *testing.T) {
 	}
 }
 
+func TestScale(t *testing.T) {
+	tests := []struct {
+		name string
+		v    []float64
+		c    float64
+		want []float64
+	}{
+		{
+			name: "zeros",
+			c:    1,
+		},
+		{
+			"ones",
+			[]float64{1, 1, 1},
+			1,
+			[]float64{1, 1, 1},
+		},
+		{
+			"negation",
+			[]float64{1.1, 1.2, 1.3},
+			-1,
+			[]float64{-1.1, -1.2, -1.3},
+		},
+		{
+			"scaled",
+			[]float64{1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9},
+			1.1,
+			[]float64{1.21, 2.42, 3.63, 4.84, 6.05, 7.26, 8.47, 9.68, 10.89},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			Scale(tt.v, tt.c)
+			for i := range tt.v {
+				if !mathx.IsClose(tt.v[i], tt.want[i]) {
+					t.Errorf("Scale() = %v, want %v", tt.v, tt.want)
+				}
+			}
+		})
+	}
+}
+
 func TestSum(t *testing.T) {
 	tests := []struct {
 		name    string

@@ -8,6 +8,12 @@ func Add[T mathx.Vector[E], E mathx.Floaty](v, w T) {
 	}
 }
 
+func Scale[T mathx.Vector[E], E mathx.Floaty](v T, c E) {
+	for i := range v {
+		v[i] *= c
+	}
+}
+
 func Sum[T mathx.Vector[E], E mathx.Floaty](v T) (ret E) {
 	const k = 8
 	for ; len(v) >= k; v = v[k:] {
