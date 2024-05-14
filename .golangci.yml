@@ -2,19 +2,19 @@ linters:
   disable-all: true
   enable:
     - dupl
+    - errcheck
     - exportloopref
-    - gas
     - gochecknoinits
     - goconst
     - gocritic
     - gocyclo
+    - gosec
     - gosimple
     - govet
     - ineffassign
     - lll
     - maintidx
     - makezero
-    - megacheck
     - misspell
     - nakedret
     - nilerr
@@ -23,6 +23,7 @@ linters:
     - nolintlint
     - prealloc
     - revive
+    - staticcheck
     - stylecheck
     - typecheck
     - unconvert
