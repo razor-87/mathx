@@ -89,6 +89,42 @@ func TestDotProd(t *testing.T) {
 	}
 }
 
+func TestLength(t *testing.T) {
+	tests := []struct {
+		name    string
+		v       []float64
+		wantRet float64
+	}{
+		{
+			"2D",
+			[]float64{1.1, 2.1},
+			2.370653,
+		},
+		{
+			"3D",
+			[]float64{1.1, 2.1, 3.1},
+			3.902563,
+		},
+		{
+			"4D",
+			[]float64{1.1, 2.1, 3.1, 4.1},
+			5.660388,
+		},
+		{
+			"10D",
+			[]float64{1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10.1},
+			19.902261,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRet := Length(tt.v); !mathx.IsClose(gotRet, tt.wantRet) {
+				t.Errorf("Length() = %v, want %v", gotRet, tt.wantRet)
+			}
+		})
+	}
+}
+
 func TestScale(t *testing.T) {
 	tests := []struct {
 		name string

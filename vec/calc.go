@@ -1,6 +1,10 @@
 package vec
 
-import "github.com/razor-87/mathx"
+import (
+	"math"
+
+	"github.com/razor-87/mathx"
+)
 
 const stride = 8
 
@@ -22,6 +26,10 @@ func DotProd[T mathx.Vector[E], E mathx.Floaty](v, w T) (ret E) {
 	}
 
 	return ret
+}
+
+func Length[T mathx.Vector[E], E mathx.Floaty](v T) (ret E) {
+	return E(math.Pow(float64(DotProd(v, v)), 0.5))
 }
 
 func Scale[T mathx.Vector[E], E mathx.Floaty](v T, c E) {
