@@ -22,6 +22,9 @@ func DotProd[T mathx.Vector[E], E mathx.Floaty](v, w T) (ret E) {
 }
 
 func Scale[T mathx.Vector[E], E mathx.Floaty](v T, c E) {
+	for ; len(v) >= stride; v = v[stride:] {
+		v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7] = v[0]*c, v[1]*c, v[2]*c, v[3]*c, v[4]*c, v[5]*c, v[6]*c, v[7]*c
+	}
 	for i := range v {
 		v[i] *= c
 	}
