@@ -93,22 +93,22 @@ func TestRand(t *testing.T) {
 
 func TestCopy(t *testing.T) {
 	t.Run("fast", func(t *testing.T) {
-		src := Inc[[]float64](5)
-		v := Copy(src)
-		if len(v) != len(src) {
-			t.Fatalf("expected length %d, got %d", len(src), len(v))
+		v := Inc[[]float64](5)
+		w := Copy(v)
+		if len(w) != len(v) {
+			t.Fatalf("expected length %d, got %d", len(v), len(w))
 		}
-		if i := 4; v[i] != src[i] {
-			t.Errorf("expected %f, got %f", src[i], v[i])
+		if i := 4; w[i] != v[i] {
+			t.Errorf("expected %f, got %f", v[i], w[i])
 		}
 	})
 	if !t.Failed() {
 		t.Run("deep", func(t *testing.T) {
-			src := Ones[[]float64](5)
-			v := Copy(src)
-			FillZeroes(src)
-			for i := range src {
-				if src[i] == v[i] {
+			v := Ones[[]float64](5)
+			w := Copy(v)
+			FillZeroes(v)
+			for i := range v {
+				if v[i] == w[i] {
 					t.Error("non-zero value is expected")
 				}
 			}

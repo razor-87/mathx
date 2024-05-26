@@ -51,8 +51,8 @@ func Rand[T mathx.Vector[E], E mathx.Floaty](size int) (v T) {
 	return v
 }
 
-func Copy[T mathx.Vector[E], E mathx.Floaty](src T) (v T) {
-	v = Zeros[T](len(src))
-	_ = copy(v, src)
-	return v
+func Copy[T mathx.Vector[E], E mathx.Floaty](v T) (w T) {
+	w = Zeros[T](len(v))
+	_ = copy(w, v)
+	return w
 }
