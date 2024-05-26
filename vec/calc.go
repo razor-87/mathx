@@ -51,3 +51,7 @@ func Sum[T mathx.Vector[E], E mathx.Floaty](v T) (ret E) {
 
 	return ret
 }
+
+func Unit[T mathx.Vector[E], E mathx.Floaty](v T) {
+	Scale(v, 1/Length(v))
+}

@@ -286,3 +286,47 @@ func TestSum(t *testing.T) {
 		})
 	}
 }
+
+func TestUnit(t *testing.T) {
+	tests := []struct {
+		name string
+		v    []float64
+		want []float64
+	}{
+		{
+			"2D",
+			[]float64{1, 2},
+			[]float64{0.447213, 0.894427},
+		},
+		{
+			"3D",
+			[]float64{1, 2, 3},
+			[]float64{0.267261, 0.534522, 0.801783},
+		},
+		{
+			"4D",
+			[]float64{1, 2, 3, 4},
+			[]float64{0.182574, 0.365148, 0.547722, 0.730296},
+		},
+		{
+			"10D",
+			[]float64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			[]float64{0.050964, 0.101929, 0.152894, 0.203858, 0.254823, 0.305788, 0.356753, 0.407717, 0.458682, 0.509647},
+		},
+		{
+			"one non-zero component",
+			[]float64{0, 0, 1, 0, 0},
+			[]float64{0, 0, 1, 0, 0},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			Unit(tt.v)
+			for i := range tt.v {
+				if !mathx.IsClose(tt.v[i], tt.want[i]) {
+					t.Errorf("Unit() = %v, want %v", tt.v, tt.want)
+				}
+			}
+		})
+	}
+}
