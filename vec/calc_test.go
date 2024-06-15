@@ -61,6 +61,51 @@ func TestAdd(t *testing.T) {
 	}
 }
 
+func TestAddScaled(t *testing.T) {
+	scalar := 1.1
+	tests := []struct {
+		name string
+		v    []float64
+		w    []float64
+		want []float64
+	}{
+		{
+			"2D",
+			[]float64{1.1, 2.1},
+			[]float64{3.1, 4.1},
+			[]float64{4.51, 6.61},
+		},
+		{
+			"3D",
+			[]float64{1.1, 2.1, 3.1},
+			[]float64{4.1, 5.1, 6.1},
+			[]float64{5.61, 7.71, 9.81},
+		},
+		{
+			"4D",
+			[]float64{1.1, 2.1, 3.1, 4.1},
+			[]float64{5.1, 6.1, 7.1, 8.1},
+			[]float64{6.71, 8.81, 10.91, 13.01},
+		},
+		{
+			"10D",
+			[]float64{1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10.1},
+			[]float64{11.1, 12.1, 13.1, 14.1, 15.1, 16.1, 17.1, 18.1, 19.1, 20.1},
+			[]float64{13.31, 15.41, 17.51, 19.61, 21.71, 23.81, 25.91, 28.01, 30.11, 32.21},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			AddScaled(tt.v, tt.w, scalar)
+			for i := range tt.v {
+				if !mathx.IsClose(tt.v[i], tt.want[i]) {
+					t.Errorf("AddScaled() = %v, want %v", tt.v, tt.want)
+				}
+			}
+		})
+	}
+}
+
 func TestDotProd(t *testing.T) {
 	tests := []struct {
 		name    string

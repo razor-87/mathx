@@ -24,6 +24,22 @@ func Add[T mathx.Vector[E], E mathx.Floaty](v, w T) {
 	}
 }
 
+func AddScaled[T mathx.Vector[E], E mathx.Floaty](v, w T, c E) {
+	for ; len(v) >= stride && len(w) >= stride; v, w = v[stride:], w[stride:] {
+		v[0] += w[0] * c
+		v[1] += w[1] * c
+		v[2] += w[2] * c
+		v[3] += w[3] * c
+		v[4] += w[4] * c
+		v[5] += w[5] * c
+		v[6] += w[6] * c
+		v[7] += w[7] * c
+	}
+	for i := 0; i < len(v) && i < len(w); i++ {
+		v[i] += w[i] * c
+	}
+}
+
 func DotProd[T mathx.Vector[E], E mathx.Floaty](v, w T) (ret E) {
 	for ; len(v) >= stride && len(w) >= stride; v, w = v[stride:], w[stride:] {
 		ret += v[0]*w[0] + v[1]*w[1] + v[2]*w[2] + v[3]*w[3] + v[4]*w[4] + v[5]*w[5] + v[6]*w[6] + v[7]*w[7]
