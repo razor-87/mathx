@@ -98,14 +98,24 @@ func TestCopy(t *testing.T) {
 		if len(w) != len(v) {
 			t.Fatalf("expected length %d, got %d", len(v), len(w))
 		}
-		if i := 4; w[i] != v[i] {
-			t.Errorf("expected %f, got %f", v[i], w[i])
+		for i := range v {
+			if v[i] != w[i] {
+				t.Errorf("expected %f, got %f", v[i], w[i])
+			}
 		}
 	})
 	if !t.Failed() {
 		t.Run("deep", func(t *testing.T) {
-			v := Ones[[]float64](5)
+			v := Ones[[]float64](100)
 			w := Copy(v)
+			if len(w) != len(v) {
+				t.Fatalf("expected length %d, got %d", len(v), len(w))
+			}
+			for i := range v {
+				if v[i] != w[i] {
+					t.Errorf("expected %f, got %f", v[i], w[i])
+				}
+			}
 			FillZeroes(v)
 			for i := range v {
 				if v[i] == w[i] {
