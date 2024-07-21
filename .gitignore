@@ -26,6 +26,3 @@
 *.out
 *.prof
 *.trace
-
-# example
-_example/
