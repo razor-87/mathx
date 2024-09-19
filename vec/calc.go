@@ -40,6 +40,22 @@ func AddScaled[T mathx.Vector[E], E mathx.Floaty](v, w T, c E) {
 	}
 }
 
+func CosSim[T mathx.Vector[E], E mathx.Floaty](v, w T) (ret E) {
+	var vw, vv, ww E
+	for ; len(v) >= stride/2 && len(w) >= stride/2; v, w = v[stride/2:], w[stride/2:] {
+		vw += v[0]*w[0] + v[1]*w[1] + v[2]*w[2] + v[3]*w[3]
+		vv += v[0]*v[0] + v[1]*v[1] + v[2]*v[2] + v[3]*v[3]
+		ww += w[0]*w[0] + w[1]*w[1] + w[2]*w[2] + w[3]*w[3]
+	}
+	for i := 0; i < len(v) && i < len(w); i++ {
+		vw += v[i] * w[i]
+		vv += v[i] * v[i]
+		ww += w[i] * w[i]
+	}
+
+	return vw / E(math.Pow(float64(vv*ww), 0.5))
+}
+
 func DotProd[T mathx.Vector[E], E mathx.Floaty](v, w T) (ret E) {
 	for ; len(v) >= stride && len(w) >= stride; v, w = v[stride:], w[stride:] {
 		ret += v[0]*w[0] + v[1]*w[1] + v[2]*w[2] + v[3]*w[3] + v[4]*w[4] + v[5]*w[5] + v[6]*w[6] + v[7]*w[7]
