@@ -6,6 +6,46 @@ import (
 	"github.com/razor-87/mathx"
 )
 
+func TestAddition(t *testing.T) {
+	tests := []struct {
+		name string
+		v    []float64
+		c    float64
+		want []float64
+	}{
+		{
+			name: "zeros",
+		},
+		{
+			name: "ones",
+			c:    1,
+			want: []float64{1, 1, 1},
+		},
+		{
+			"negation",
+			[]float64{1, 2, 3},
+			-0.1,
+			[]float64{0.9, 1.9, 2.9},
+		},
+		{
+			"added",
+			[]float64{1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9},
+			1.1,
+			[]float64{2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 11},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			Addition(tt.v, tt.c)
+			for i := range tt.v {
+				if !mathx.IsClose(tt.v[i], tt.want[i]) {
+					t.Errorf("Addition() = %v, want %v", tt.v[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
 func TestAdd(t *testing.T) {
 	tests := []struct {
 		name string

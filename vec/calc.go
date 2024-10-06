@@ -8,6 +8,22 @@ import (
 
 const stride = 8
 
+func Addition[T mathx.Vector[E], E mathx.Floaty](v T, c E) {
+	for ; len(v) >= stride; v = v[stride:] {
+		v[0] += c
+		v[1] += c
+		v[2] += c
+		v[3] += c
+		v[4] += c
+		v[5] += c
+		v[6] += c
+		v[7] += c
+	}
+	for i := range v {
+		v[i] += c
+	}
+}
+
 func Add[T mathx.Vector[E], E mathx.Floaty](v, w T) {
 	for ; len(v) >= stride && len(w) >= stride; v, w = v[stride:], w[stride:] {
 		v[0] += w[0]
